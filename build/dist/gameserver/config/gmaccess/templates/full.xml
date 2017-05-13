@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<templates>
+	<command-list name="all"></command-list>
+
+	<!-- в template есть пар-р default по умолчанию false если true то этот
+	шаблон будет применятся ко вчем чарам без шаблона
+
+	allow-command-list и deny-command-list допускается указание списка комманд через запятую
+	либо имя группы command-list
+	-->
+	<template name="full" allow-command-list="" deny-command-list="">
+		<!-- ГМ -->
+		<property name="isGM" value="true"/>
+		<!-- Запретить дроп при убийстве игрока предметов -->
+		<property name="noDrop" value="true"/>
+		<!-- разрешает использовать комманды // -->
+		<property name="useCommands" value="true"/>
+		<!-- Разрешает покупать в магазинах за 0 аден -->
+		<property name="zeroBuy" value="true"/>
+		<!-- Разрешает удалять не удаляемы итемы -->
+		<property name="discardItem" value="true"/>
+		<!-- Разрешает просматривать инфу о персонаже -->
+		<property name="viewPlayerInfo" value="true"/>
+		<!-- Разрешает просматривать инфу о клане персонаже -->
+		<property name="viewClanInfo" value="true"/>
+		<!-- Разрешает просматривать инфу о скилах персонаже -->
+		<property name="viewSkillInfo" value="true"/>
+		<!-- Разрешает просматривать инфу о итемах (инвентарь/вх) персонаже -->
+		<property name="viewItemInfo" value="true"/>
+		<!-- Разрешает ресаться на месте -->
+		<property name="resurrectFixed" value="true"/>
+		<!-- Разрешает говорить в хиро чат -->
+		<property name="heroVoice" value="true"/>
+		<!-- Разрешает атаковать в мирной зоне -->
+		<property name="peaceAttack" value="false"/>
+		<!-- Разрешает смену класса -->
+		<property name="changeClass" value="true"/>
+		<!-- Разрешает запускать/останавливать эвенты -->
+		<property name="eventMaster" value="true"/>
+		<!-- Разрешает удалять с CoL Market'а -->
+		<property name="marketAdmin" value="true"/>
+		<!-- Разрешает создавать итемы из запрещенного списка -->
+		<property name="forceCreate" value="true"/>
+		<!--
+		  Запретить игроку физ. атаку.
+		  <property name="noAttack" value="true"/>
+		  Запретить игроку создавать/покупать/продавать в магазины
+		  <property name="noPrivateStore" value="true"/>
+		  Запретить пользоваться инвентарем
+		  <property name="noInventory" value="true"/>
+		  Запрещает бросать вещи на пол
+		  <property name="noDropItems" value="true"/>
+		  Запрещает создавать/вступать в пати
+		  <property name="noParty" value="true"/>
+		  Запрещает создавать/вступать в клан
+		  <property name="noClan" value="true"/>
+		  Запрещает использовать ВХ/Фрейт
+		  <property name="noWarehouse" value="true"/>
+		  Запрещает использовать клан ВХ
+		  <property name="noClanWarehouse" value="true"/>
+		  Запрещает использовать трейд между игроками
+		  <property name="noTrade" value="true"/>
+		  Запрещает использовать магазины у нпц
+		  <property name="noShop" value="true"/>
+
+		  В проперти можно добавлять лимиты:
+		  <property name="noShop" value="true">
+			<limit>
+			   <range points=""/>
+			</limit>
+          </property>
+
+          В <limit> можно указывать группу комманд к которой он применятся:
+          <limit command-group="имя группы либо список комманд через запятую">
+
+          command-match true если command =~/^command-match/
+
+		<limit command-match="gmshop">
+			 <range points=""/> - ограничивает территорию использования комманды, территория задается в формате {{x1;y1;zMin;zMax};{x2;y2;zMin;zMax};{x3;y3;zMin;zMax};....}
+			 <time start="10:00" end="22:00"/> - Ограничение по времени, можно задавать дни недели days="1,2,3" формат 1-7 суббота-воскресенье
+			 <target type="self"/> - органичивает таргет использования комманды, пока доступно только self
+			 <arg num="1" min="1" max="10"/> - ограничивает аргмунт команды от 1 до 10 включительно, всего может быть до 3 аргментов.
+			 <arg num="1" list="1,2,3,4"/> - ограничивает аргумент списком значений, по умолчанию тип занчения int
+			 <arg num="1" type="string" list="aa,bb,cc"/> - ограничивает аргумент списком значений, типа значения string
+			 доступны логические операции с лимитами:
+			 логическое "или"
+			 <or>
+			 	<arg num="1" min="1" max="10"/>
+			 	<arg num="1" min="20" max="30"/>
+			 </or>
+			 логическое "и"
+			 <and>
+			 	<arg num="1" min="1" max="10"/>
+			 	<arg num="1" min="20" max="30"/>
+			 </and>
+			 логическое "не"
+			 <not>
+			 	<arg num="1" min="1" max="10"/>
+			 </not>
+		</limit>
+		-->
+	</template>
+
+</templates>

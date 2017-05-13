@@ -1,0 +1,474 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration>
+
+	<appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{HH:mm:ss.SSS}  %m%n"/>
+		</layout>
+	</appender>
+
+	<appender name="CONSOLE_TO_FILE" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="file" value="log/console.log"/>
+		<param name="datePattern" value="'.'MM-dd-yyyy"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{yyyy.MM.dd HH:mm:ss,SSS} %p %m%n"/>
+		</layout>
+	</appender>
+
+	<appender name="appender.ru.l2gw" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="file" value="log/ru.l2gw.log"/>
+		<param name="datePattern" value="'.'MM-dd-yyyy"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{yyyy.MM.dd HH:mm:ss,SSS} %p %m%n"/>
+		</layout>
+	</appender>
+
+	<!-- item log appender-->
+	<appender name="ITEMLOG" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="Threshold" value="INFO"/>
+		<param name="Encoding" value="UTF-8"/>
+		<param name="File" value="log/items/items"/>
+		<param name="Append" value="true"/>
+		<param name="DatePattern" value="'-'yyyyMMdd'.log'"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{[dd.MM.yyyy HH:mm:ss]} %m%n"/>
+		</layout>
+	</appender>
+
+	<!-- network log appender-->
+	<appender name="NETLOG" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="Threshold" value="INFO"/>
+		<param name="Encoding" value="UTF-8"/>
+		<param name="File" value="log/network/net"/>
+		<param name="Append" value="true"/>
+		<param name="DatePattern" value="'-'yyyyMMdd'.log'"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{[dd.MM.yyyy HH:mm:ss]} %m%n"/>
+		</layout>
+	</appender>
+
+	<!-- HWID log appender-->
+	<appender name="HWID" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="Threshold" value="INFO"/>
+		<param name="Encoding" value="UTF-8"/>
+		<param name="File" value="log/network/hwid"/>
+		<param name="Append" value="true"/>
+		<param name="DatePattern" value="'-'yyyyMMdd'.log'"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{[dd.MM.yyyy HH:mm:ss]} %m%n"/>
+		</layout>
+	</appender>
+
+	<!-- Protect log appender-->
+	<appender name="PROTECT" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="Threshold" value="INFO"/>
+		<param name="Encoding" value="UTF-8"/>
+		<param name="File" value="log/network/protect"/>
+		<param name="Append" value="true"/>
+		<param name="DatePattern" value="'-'yyyyMMdd'.log'"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{[dd.MM.yyyy HH:mm:ss]} %m%n"/>
+		</layout>
+	</appender>
+
+	<!-- network debug log appender-->
+	<appender name="NETDBG" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="Threshold" value="INFO"/>
+		<param name="Encoding" value="UTF-8"/>
+		<param name="File" value="log/network/debug"/>
+		<param name="Append" value="true"/>
+		<param name="DatePattern" value="'-'yyyyMMdd'.log'"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{[dd.MM.yyyy HH:mm:ss]} %m%n"/>
+		</layout>
+	</appender>
+
+	<!-- olymp log appender-->
+	<appender name="OLYMPLOG" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="Threshold" value="INFO"/>
+		<param name="Encoding" value="UTF-8"/>
+		<param name="File" value="log/olymp/olymp"/>
+		<param name="Append" value="true"/>
+		<param name="DatePattern" value="'-'yyyyMMdd'.log'"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{[dd.MM.yyyy HH:mm:ss]} %m%n"/>
+		</layout>
+	</appender>
+
+	<!-- market log appender-->
+	<appender name="MARKETLOG" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="Threshold" value="INFO"/>
+		<param name="Encoding" value="UTF-8"/>
+		<param name="File" value="log/market/market"/>
+		<param name="Append" value="true"/>
+		<param name="DatePattern" value="'-'yyyyMMdd'.log'"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{[dd.MM.yyyy HH:mm:ss]} %m%n"/>
+		</layout>
+	</appender>
+
+	<!-- transfer manager log appender-->
+	<appender name="TRANSFERMGR" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="Threshold" value="INFO"/>
+		<param name="Encoding" value="UTF-8"/>
+		<param name="File" value="log/transfer/transfer"/>
+		<param name="Append" value="true"/>
+		<param name="DatePattern" value="'-'yyyyMMdd'.log'"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{[dd.MM.yyyy HH:mm:ss]} %m%n"/>
+		</layout>
+	</appender>
+
+	<!-- seven signs log appender-->
+	<appender name="SEVENSIGNS" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="Threshold" value="INFO"/>
+		<param name="Encoding" value="UTF-8"/>
+		<param name="File" value="log/sevensigns/sevensigns"/>
+		<param name="Append" value="true"/>
+		<param name="DatePattern" value="'-'yyyyMMdd'.log'"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{[dd.MM.yyyy HH:mm:ss]} %m%n"/>
+		</layout>
+	</appender>
+
+	<!-- bosses log appender-->
+	<appender name="BOSSLOG" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="Threshold" value="INFO"/>
+		<param name="Encoding" value="UTF-8"/>
+		<param name="File" value="log/game/boss/boss"/>
+		<param name="Append" value="true"/>
+		<param name="DatePattern" value="'-'yyyyMMdd'.log'"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{[dd.MM.yyyy HH:mm:ss]} %m%n"/>
+		</layout>
+	</appender>
+
+	<!-- bot reports log appender-->
+	<appender name="BOTREPORT" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="Threshold" value="INFO"/>
+		<param name="Encoding" value="UTF-8"/>
+		<param name="File" value="log/game/botreport"/>
+		<param name="Append" value="true"/>
+		<param name="DatePattern" value="'-'yyyyMMdd'.log'"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{[dd.MM.yyyy HH:mm:ss]} %m%n"/>
+		</layout>
+	</appender>
+
+	<!-- clan hall log appender-->
+	<appender name="CLANHALL" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="Threshold" value="INFO"/>
+		<param name="Encoding" value="UTF-8"/>
+		<param name="File" value="log/clanhall/clanhall"/>
+		<param name="Append" value="true"/>
+		<param name="DatePattern" value="'-'yyyyMMdd'.log'"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{[dd.MM.yyyy HH:mm:ss]} %m%n"/>
+		</layout>
+	</appender>
+
+	<appender name="SIEGEUNIT" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="Threshold" value="INFO"/>
+		<param name="Encoding" value="UTF-8"/>
+		<param name="File" value="log/siegeunit/siegeunit"/>
+		<param name="Append" value="true"/>
+		<param name="DatePattern" value="'-'yyyyMMdd'.log'"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{[dd.MM.yyyy HH:mm:ss]} %m%n"/>
+		</layout>
+	</appender>
+
+    <!-- mail log appender-->
+    <appender name="MAIL" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="Threshold" value="INFO"/>
+        <param name="Encoding" value="UTF-8"/>
+        <param name="File" value="log/mail/mail"/>
+        <param name="Append" value="true"/>
+        <param name="DatePattern" value="'-'yyyyMMdd'.log'"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{[dd.MM.yyyy HH:mm:ss]} %m%n"/>
+        </layout>
+    </appender>
+
+    <!-- instances log appender-->
+	<appender name="INSTANCES" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="Threshold" value="INFO"/>
+		<param name="Encoding" value="UTF-8"/>
+		<param name="File" value="log/instances/instances"/>
+		<param name="Append" value="true"/>
+		<param name="DatePattern" value="'-'yyyyMMdd'.log'"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{[dd.MM.yyyy HH:mm:ss]} %m%n"/>
+		</layout>
+	</appender>
+
+	<appender name="SKILLENCHANT" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="Threshold" value="INFO"/>
+		<param name="Encoding" value="UTF-8"/>
+		<param name="File" value="log/game/skillenchant"/>
+		<param name="Append" value="true"/>
+		<param name="DatePattern" value="'-'yyyyMMdd'.log'"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{[dd.MM.yyyy HH:mm:ss]} %m%n"/>
+		</layout>
+	</appender>
+
+	<appender name="PRODUCTLOG" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="Threshold" value="INFO"/>
+		<param name="Encoding" value="UTF-8"/>
+		<param name="File" value="log/game/productlog"/>
+		<param name="Append" value="true"/>
+		<param name="DatePattern" value="'-'yyyyMMdd'.log'"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{[dd.MM.yyyy HH:mm:ss]} %m%n"/>
+		</layout>
+	</appender>
+
+	<appender name="FIELDCYCLE" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="Threshold" value="INFO"/>
+		<param name="Encoding" value="UTF-8"/>
+		<param name="File" value="log/game/fieldcycle/fieldcycle"/>
+		<param name="Append" value="true"/>
+		<param name="DatePattern" value="'-'yyyyMMdd'.log'"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{[dd.MM.yyyy HH:mm:ss]} %m%n"/>
+		</layout>
+	</appender>
+
+	<appender name="CHAT" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="Threshold" value="INFO"/>
+		<param name="Encoding" value="UTF-8"/>
+		<param name="File" value="log/game/chat"/>
+		<param name="Append" value="true"/>
+		<param name="DatePattern" value="'-'yyyyMMdd'.log'"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{[dd.MM.yyyy HH:mm:ss]} %m%n"/>
+		</layout>
+	</appender>
+
+	<appender name="BANCHAT" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="Threshold" value="INFO"/>
+		<param name="Encoding" value="UTF-8"/>
+		<param name="File" value="log/game/chat-incidents"/>
+		<param name="Append" value="true"/>
+		<param name="DatePattern" value="'-'yyyyMMdd'.log'"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{[dd.MM.yyyy HH:mm:ss]} %m%n"/>
+		</layout>
+	</appender>
+
+	<appender name="ADMINCMD" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="Threshold" value="INFO"/>
+		<param name="Encoding" value="UTF-8"/>
+		<param name="File" value="log/game/gm-commands"/>
+		<param name="Append" value="true"/>
+		<param name="DatePattern" value="'-'yyyyMMdd'.log'"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{[dd.MM.yyyy HH:mm:ss]} %m%n"/>
+		</layout>
+	</appender>
+
+	<appender name="TREASURE" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="Threshold" value="INFO"/>
+		<param name="Encoding" value="UTF-8"/>
+		<param name="File" value="log/game/treasure"/>
+		<param name="Append" value="true"/>
+		<param name="DatePattern" value="'-'yyyyMMdd'.log'"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{[dd.MM.yyyy HH:mm:ss]} %m%n"/>
+		</layout>
+	</appender>
+
+	<appender name="CLAN" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="Threshold" value="INFO"/>
+		<param name="Encoding" value="UTF-8"/>
+		<param name="File" value="log/game/clan_reputation"/>
+		<param name="Append" value="true"/>
+		<param name="DatePattern" value="'-'yyyyMMdd'.log'"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{[dd.MM.yyyy HH:mm:ss]} %m%n"/>
+		</layout>
+	</appender>
+
+	<appender name="AUTOSAVEMANAGER" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="Threshold" value="INFO"/>
+		<param name="Encoding" value="UTF-8"/>
+		<param name="File" value="log/game/autoSaveManager"/>
+		<param name="Append" value="true"/>
+		<param name="DatePattern" value="'-'yyyyMMdd'.log'"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{[dd.MM.yyyy HH:mm:ss]} %m%n"/>
+		</layout>
+	</appender>
+
+	<appender name="ILLEGAL-ACTIONS" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="Threshold" value="INFO"/>
+		<param name="Encoding" value="UTF-8"/>
+		<param name="File" value="log/game/illegal-actions"/>
+		<param name="Append" value="true"/>
+		<param name="DatePattern" value="'-'yyyyMMdd'.log'"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{[dd.MM.yyyy HH:mm:ss]} %m%n"/>
+		</layout>
+	</appender>
+
+	<appender name="GM-ACTIONS" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="Threshold" value="INFO"/>
+		<param name="Encoding" value="UTF-8"/>
+		<param name="File" value="log/game/gm-actions"/>
+		<param name="Append" value="true"/>
+		<param name="DatePattern" value="'-'yyyyMMdd'.log'"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{[dd.MM.yyyy HH:mm:ss]} %m%n"/>
+		</layout>
+	</appender>
+
+	<appender name="SERVICE" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="Threshold" value="INFO"/>
+		<param name="Encoding" value="UTF-8"/>
+		<param name="File" value="log/game/service"/>
+		<param name="Append" value="true"/>
+		<param name="DatePattern" value="'-'yyyyMMdd'.log'"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{[dd.MM.yyyy HH:mm:ss]} %m%n"/>
+		</layout>
+	</appender>
+
+	<appender name="PC-KILLS" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="Threshold" value="INFO"/>
+		<param name="Encoding" value="UTF-8"/>
+		<param name="File" value="log/game/kills"/>
+		<param name="Append" value="true"/>
+		<param name="DatePattern" value="'-'yyyyMMdd'.log'"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{[dd.MM.yyyy HH:mm:ss]} %m%n"/>
+		</layout>
+	</appender>
+
+	<appender name="MOVEDEBUG" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="Threshold" value="INFO"/>
+		<param name="Encoding" value="UTF-8"/>
+		<param name="File" value="log/olymp/movedebug"/>
+		<param name="Append" value="true"/>
+		<param name="DatePattern" value="'-'yyyyMMdd'.log'"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{[dd.MM.yyyy HH:mm:ss]} %m%n"/>
+		</layout>
+	</appender>
+
+	<appender name="CAPTURE" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="Threshold" value="INFO"/>
+		<param name="Encoding" value="UTF-8"/>
+		<param name="File" value="log/game/capture-event"/>
+		<param name="Append" value="true"/>
+		<param name="DatePattern" value="'-'yyyyMMdd'.log'"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{[dd.MM.yyyy HH:mm:ss]} %m%n"/>
+		</layout>
+	</appender>
+
+	<logger name="ru.l2gw">
+		<level value="info"/>
+		<appender-ref ref="appender.ru.l2gw"/>
+	</logger>
+	<logger name="item" additivity="false">
+		<appender-ref ref="ITEMLOG"/>
+	</logger>
+	<logger name="network" additivity="false">
+		<appender-ref ref="NETLOG"/>
+	</logger>
+	<logger name="hwid" additivity="false">
+		<appender-ref ref="HWID"/>
+	</logger>
+	<logger name="protect" additivity="false">
+		<appender-ref ref="PROTECT"/>
+	</logger>
+	<logger name="network-debug" additivity="false">
+		<appender-ref ref="NETDBG"/>
+	</logger>
+	<logger name="olymp" additivity="false">
+		<appender-ref ref="OLYMPLOG"/>
+	</logger>
+	<logger name="market" additivity="false">
+		<appender-ref ref="MARKETLOG"/>
+	</logger>
+	<logger name="sevensigns" additivity="false">
+		<appender-ref ref="SEVENSIGNS"/>
+	</logger>
+	<logger name="transferManager" additivity="false">
+		<appender-ref ref="TRANSFERMGR"/>
+	</logger>
+	<logger name="boss" additivity="false">
+		<appender-ref ref="BOSSLOG"/>
+	</logger>
+	<logger name="botreport" additivity="false">
+		<appender-ref ref="BOTREPORT"/>
+	</logger>
+	<logger name="clanhall" additivity="false">
+		<appender-ref ref="CLANHALL"/>
+	</logger>
+	<logger name="siegeunit" additivity="false">
+		<appender-ref ref="SIEGEUNIT"/>
+	</logger>
+    <logger name="mail" additivity="false">
+        <appender-ref ref="MAIL"/>
+    </logger>
+	<logger name="instances" additivity="false">
+		<appender-ref ref="INSTANCES"/>
+	</logger>
+	<logger name="skillEnchant" additivity="false">
+		<appender-ref ref="SKILLENCHANT"/>
+	</logger>
+	<logger name="product" additivity="false">
+		<appender-ref ref="PRODUCTLOG"/>
+	</logger>
+	<logger name="fieldcycle" additivity="false">
+		<appender-ref ref="FIELDCYCLE"/>
+	</logger>
+	<logger name="chat" additivity="false">
+		<appender-ref ref="CHAT"/>
+	</logger>
+	<logger name="banchat" additivity="false">
+		<appender-ref ref="BANCHAT"/>
+	</logger>
+	<logger name="admincmd" additivity="false">
+		<appender-ref ref="ADMINCMD"/>
+	</logger>
+	<logger name="treasure" additivity="false">
+		<appender-ref ref="TREASURE"/>
+	</logger>
+	<logger name="clan" additivity="false">
+		<appender-ref ref="CLAN"/>
+	</logger>
+	<logger name="autoSaveManager" additivity="false">
+		<appender-ref ref="AUTOSAVEMANAGER"/>
+	</logger>
+	<logger name="movedebug" additivity="false">
+		<appender-ref ref="MOVEDEBUG"/>
+	</logger>
+	<logger name="illegal-actions" additivity="false">
+		<appender-ref ref="ILLEGAL-ACTIONS"/>
+	</logger>
+	<logger name="gm-actions" additivity="false">
+		<appender-ref ref="GM-ACTIONS"/>
+	</logger>
+	<logger name="service" additivity="false">
+		<appender-ref ref="SERVICE"/>
+	</logger>
+	<logger name="pc-kills" additivity="false">
+		<appender-ref ref="PC-KILLS"/>
+	</logger>
+	<logger name="capture" additivity="false">
+		<appender-ref ref="CAPTURE"/>
+	</logger>
+
+	<root>
+		<priority value="info"/>
+		<appender-ref ref="CONSOLE"/>
+		<appender-ref ref="CONSOLE_TO_FILE"/>
+	</root>
+
+</log4j:configuration>

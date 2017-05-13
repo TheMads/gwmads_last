@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="L2gw" default="dist" basedir=".">
+	<property name="src" location="gameserver/java"/>
+	<property name="src.commons" location="commons/java"/>
+	<property name="src.login" location="loginserver/java"/>
+	<property name="src.fake" location="fakeserver/java"/>
+	<property name="lib" location="lib"/>
+	<property name="build" location="build"/>
+	<property name="build.commons" location="${build}/commons/classes"/>
+	<property name="build.gameserver" location="${build}/gameserver/classes"/>
+	<property name="build.loginserver" location="${build}/loginserver/classes"/>
+	<property name="build.fakeserver" location="${build}/fakeserver/classes"/>
+	<property name="build.dist" location="${build}/dist"/>
+	<property name="build.dist.login" location="${build.dist}/login"/>
+	<property name="build.dist.game" location="${build.dist}/gameserver"/>
+	<property name="build.dist.fake" location="${build.dist}/fakeserver"/>
+
+	<path id="classpath">
+		<fileset dir="lib">
+			<include name="**/*.jar"/>
+		</fileset>
+	</path>
+
+	<pathconvert property="jar.list" pathsep=" " refid="classpath">
+		<mapper type="flatten"/>
+	</pathconvert>
+
+	<target name="clean" description="Remove the output directories">
+		<delete dir="${build}"/>
+	</target>
+
+	<target name="clean_login" description="Remove the output directories">
+		<delete dir="${build.loginserver}"/>
+	</target>
+
+	<target name="clean_fake" description="Remove the output directories">
+		<delete dir="${build.fakeserver}"/>
+	</target>
+
+	<target name="clean_commons" description="Remove the output directories">
+		<delete dir="${build.commons}"/>
+	</target>
+
+	<target name="cc" description="Remove the classes directories">
+		<delete dir="${build}/classes"/>
+	</target>
+
+	<target name="init" description="Create the output directories.">
+		<mkdir dir="${build}"/>
+		<mkdir dir="${build.gameserver}"/>
+		<mkdir dir="${build.dist}"/>
+		<mkdir dir="${build.dist.login}"/>
+		<mkdir dir="${build.dist.game}"/>
+	</target>
+
+	<target name="init_commons" description="Create the output directories.">
+		<mkdir dir="${build}"/>
+		<mkdir dir="${build.commons}"/>
+	</target>
+
+	<target name="init_login" description="Create the output directories.">
+		<mkdir dir="${build}"/>
+		<mkdir dir="${build.loginserver}"/>
+	</target>
+
+	<target name="init_fake" description="Create the output directories.">
+		<mkdir dir="${build}"/>
+		<mkdir dir="${build.fakeserver}"/>
+	</target>
+
+	<target name="compile" depends="init" description="Compile the source.">
+		<javac destdir="${build.gameserver}"
+			   optimize="off"
+			   debug="on"
+			   source="1.7"
+			   target="1.7"
+			   encoding="UTF-8"
+			   nowarn="off">
+			<compilerarg value="-Xlint:all"/>
+			<src path="${src}"/>
+			<classpath refid="classpath"/>
+		</javac>
+	</target>
+
+	<target name="compile_commons" depends="init" description="Compile commons source.">
+		<javac destdir="${build.commons}"
+			   optimize="off"
+			   debug="on"
+			   source="1.7"
+			   target="1.7"
+			   encoding="UTF-8"
+			   nowarn="off">
+			<compilerarg value="-Xlint:all"/>
+			<src path="${src.commons}"/>
+			<classpath refid="classpath"/>
+		</javac>
+	</target>
+
+	<target name="compile_login" depends="init_login" description="Compile login server source.">
+		<javac destdir="${build.loginserver}"
+			   optimize="off"
+			   debug="on"
+			   source="1.7"
+			   target="1.7"
+			   encoding="UTF-8"
+			   nowarn="off">
+			<compilerarg value="-Xlint:all"/>
+			<src path="${src.login}"/>
+			<classpath refid="classpath"/>
+		</javac>
+	</target>
+
+	<target name="compile_fake" depends="init_fake" description="Compile fake server source.">
+		<javac destdir="${build.fakeserver}"
+			   optimize="off"
+			   debug="on"
+			   source="1.7"
+			   target="1.7"
+			   encoding="UTF-8"
+			   nowarn="off">
+			<compilerarg value="-Xlint:all"/>
+			<src path="${src.fake}"/>
+			<classpath refid="classpath"/>
+		</javac>
+	</target>
+
+	<target name="debug" depends="init" description="Compile the source with debug info.">
+		<javac destdir="${build.gameserver}"
+			   optimize="off"
+			   debug="on"
+			   source="1.7"
+			   target="1.7"
+			   encoding="UTF-8"
+			   nowarn="off">
+			<compilerarg value="-Xlint:all"/>
+			<src path="${src}"/>
+			<classpath refid="classpath"/>
+		</javac>
+	</target>
+
+	<target name="commons" depends="clean_commons,init_commons,compile_commons" description="Compile commons">
+		<tstamp>
+			<format property="build.tstamp" pattern="yyyy.MM.dd HH:mm"/>
+		</tstamp>
+
+		<jar destfile="${build}/commons-l2gw.jar">
+			<fileset dir="${build.commons}"/>
+			<fileset dir="${src.commons}"/>
+			<manifest>
+				<attribute name="Class-Path" value=". ${jar.list}"/>
+				<attribute name="Build-By" value="${user.name}/${os.name}"/>
+				<attribute name="Build-Date" value="${build.tstamp}"/>
+				<attribute name="Implementation-Build" value="${build.revision}"/>
+			</manifest>
+		</jar>
+		<copy todir="lib">
+			<fileset dir="${build}">
+				<include name="commons-l2gw.jar"/>
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="jar" depends="clean,compile" description="Create the l2server.jar file">
+		<exec dir="." executable="svnversion" outputproperty="build.revision" failifexecutionfails="false">
+			<arg line="-n ."/>
+		</exec>
+
+		<tstamp>
+			<format property="build.tstamp" pattern="yyyy.MM.dd HH:mm"/>
+		</tstamp>
+
+		<jar destfile="${build}/l2server.jar">
+			<fileset dir="${build.gameserver}"/>
+			<fileset dir="${src}">
+				<include name="log4j.*"/>
+			</fileset>
+			<manifest>
+				<attribute name="Main-Class" value="ru.l2gw.gameserver.GameServer"/>
+				<attribute name="Class-Path" value=". ${jar.list}"/>
+				<attribute name="Build-By" value="${user.name}/${os.name}" />
+				<attribute name="Build-Date" value="${build.tstamp}" />
+				<attribute name="Implementation-Build" value="${build.revision}" />
+			</manifest>
+		</jar>
+
+		<copy todir="${build.dist.game}">
+			<fileset dir="${build}">
+				<include name="l2server.jar"/>
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="login" depends="clean_login,compile_login" description="Create the jar file">
+		<exec dir="." executable="svnversion" outputproperty="build.revision" failifexecutionfails="false">
+			<arg line="-n ."/>
+		</exec>
+
+		<tstamp>
+			<format property="build.tstamp" pattern="yyyy.MM.dd HH:mm"/>
+		</tstamp>
+
+		<jar destfile="${build}/l2login.jar">
+			<fileset dir="${build.loginserver}"/>
+			<fileset dir="${src.login}">
+				<include name="log4j.*"/>
+			</fileset>
+			<manifest>
+				<attribute name="Main-Class" value="ru.l2gw.loginserver.L2LoginServer"/>
+				<attribute name="Class-Path" value=". ${jar.list}"/>
+				<attribute name="Build-By" value="${user.name}/${os.name}" />
+				<attribute name="Build-Date" value="${build.tstamp}" />
+				<attribute name="Implementation-Build" value="${build.revision}" />
+			</manifest>
+		</jar>
+
+		<copy todir="${build.dist.login}">
+			<fileset dir="${build}">
+				<include name="l2login.jar"/>
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="fake" depends="clean_fake,compile_fake" description="Create the jar file">
+		<exec dir="." executable="svnversion" outputproperty="build.revision" failifexecutionfails="false">
+			<arg line="-n ."/>
+		</exec>
+
+		<tstamp>
+			<format property="build.tstamp" pattern="yyyy.MM.dd HH:mm"/>
+		</tstamp>
+
+		<jar destfile="${build}/l2fake.jar">
+			<fileset dir="${build.fakeserver}"/>
+			<fileset dir="${src.fake}">
+				<include name="log4j.*"/>
+			</fileset>
+			<manifest>
+				<attribute name="Main-Class" value="ru.l2gw.fakeserver.FakeServer"/>
+				<attribute name="Class-Path" value=". ${jar.list}"/>
+				<attribute name="Build-By" value="${user.name}/${os.name}" />
+				<attribute name="Build-Date" value="${build.tstamp}" />
+				<attribute name="Implementation-Build" value="${build.revision}" />
+			</manifest>
+		</jar>
+
+		<copy todir="${build.dist.fake}">
+			<fileset dir="${build}">
+				<include name="l2fake.jar"/>
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="dist_common" depends="jar,login">
+		<copy todir="${build.dist.login}">
+			<fileset dir="lib">
+				<include name="*.jar"/>
+			</fileset>
+		</copy>
+
+		<copy todir="${build.dist.login}">
+			<fileset dir="${src.login}">
+				<include name="startAccountManager.*"/>
+				<include name="startSQLAccountManager.*"/>
+				<include name="LoginServer_loop.sh"/>
+				<include name="StartLoginServer.*"/>
+				<include name="RegisterGameServer.*"/>
+			</fileset>
+		</copy>
+
+		<copy todir="${build.dist.game}">
+			<fileset dir="lib">
+				<include name="*.jar"/>
+			</fileset>
+		</copy>
+
+		<copy todir="${build.dist.game}">
+			<fileset dir="${src}">
+				<include name="GameServer_loop.sh"/>
+				<include name="StartGameServer.*"/>
+			</fileset>
+		</copy>
+
+		<mkdir dir="${build.dist.game}/log"/>
+		<mkdir dir="${build.dist.login}/log"/>
+
+		<mkdir dir="${build.dist.game}/config"/>
+		<mkdir dir="${build.dist.game}/config/defaults"/>
+		<copy todir="${build.dist.game}/config/defaults">
+			<fileset dir="${src}/config">
+				<include name="*.properties"/>
+				<include name="*.xml"/>
+				<include name="*.cfg"/>
+				<include name="*.txt"/>
+			</fileset>
+		</copy>
+
+		<mkdir dir="${build.dist.game}/config/gmaccess"/>
+		<mkdir dir="${build.dist.game}/config/gmaccess/templates"/>
+		<mkdir dir="${build.dist.game}/config/defaults/gmaccess"/>
+		<mkdir dir="${build.dist.game}/config/defaults/gmaccess/templates"/>
+		<copy todir="${build.dist.game}/config/gmaccess/templates">
+			<fileset dir="${src}/config/gmaccess/templates">
+				<include name="*.xml"/>
+			</fileset>
+		</copy>
+		<copy todir="${build.dist.game}/config/defaults/gmaccess/templates">
+			<fileset dir="${src}/config/gmaccess/templates">
+				<include name="*.xml"/>
+			</fileset>
+		</copy>
+
+		<mkdir dir="${build.dist.login}/config"/>
+		<mkdir dir="${build.dist.login}/config/defaults"/>
+		<copy todir="${build.dist.login}/config/defaults">
+			<fileset dir="${src.login}/config">
+				<include name="loginserver.properties"/>
+				<include name="login_telnet.properties"/>
+			</fileset>
+		</copy>
+
+		<fixcrlf srcdir="${build.dist.game}"
+				 eol="lf"
+				 eof="remove"
+				 includes="**/*.sh">
+		</fixcrlf>
+
+		<fixcrlf srcdir="${build.dist.login}"
+				 eol="lf"
+				 eof="remove"
+				 includes="**/*.sh">
+		</fixcrlf>
+
+		<fixcrlf srcdir="${build.dist.game}"
+				 eol="crlf"
+				 eof="remove"
+				 includes="**/*.bat">
+		</fixcrlf>
+
+		<fixcrlf srcdir="${build.dist.login}"
+				 eol="crlf"
+				 eof="remove"
+				 includes="**/*.bat">
+		</fixcrlf>
+
+	</target>
+
+	<target name="dist" depends="dist_common">
+		<zip destfile="${build}/l2-server.zip" basedir="${build.dist}"/>
+	</target>
+
+</project>

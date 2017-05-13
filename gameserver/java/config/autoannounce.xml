@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<list>
+	<announce delay="600" repeat="6000">
+		<message text="Приветствуем на самом лучшем сервере" />
+		<message text="Желаем приятной игры!" />
+	</announce>
+</list>
+
+

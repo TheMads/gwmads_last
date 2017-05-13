@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration>
+
+	<appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{HH:mm:ss.SSS}  %m%n"/>
+		</layout>
+	</appender>
+
+	<appender name="CONSOLE_TO_FILE" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="file" value="log/console.log"/>
+		<param name="datePattern" value="'.'MM-dd-yyyy"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{yyyy.MM.dd HH:mm:ss,SSS} %p %m%n"/>
+		</layout>
+	</appender>
+
+	<appender name="appender.ru.l2gw" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="file" value="log/ru.l2gw.log"/>
+		<param name="datePattern" value="'.'MM-dd-yyyy"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{yyyy.MM.dd HH:mm:ss,SSS} %p %m%n"/>
+		</layout>
+	</appender>
+
+	<appender name="LOGINFAILS" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="Threshold" value="INFO"/>
+		<param name="Encoding" value="UTF-8"/>
+		<param name="File" value="log/login_ip_fails"/>
+		<param name="Append" value="true"/>
+		<param name="DatePattern" value="'-'yyyyMMdd'.log'"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{[dd.MM.yyyy HH:mm:ss]} %m%n"/>
+		</layout>
+	</appender>
+
+	<appender name="LOGIN" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="Threshold" value="INFO"/>
+		<param name="Encoding" value="UTF-8"/>
+		<param name="File" value="log/login_ip"/>
+		<param name="Append" value="true"/>
+		<param name="DatePattern" value="'-'yyyyMMdd'.log'"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{[dd.MM.yyyy HH:mm:ss]} %m%n"/>
+		</layout>
+	</appender>
+
+	<logger name="ru.l2gw">
+		<level value="info"/>
+		<appender-ref ref="appender.ru.l2gw"/>
+	</logger>
+
+	<logger name="loginfails" additivity="false">
+		<appender-ref ref="LOGINFAILS"/>
+	</logger>
+
+	<logger name="login" additivity="false">
+		<appender-ref ref="LOGIN"/>
+	</logger>
+
+	<root>
+		<priority value="info"/>
+		<appender-ref ref="CONSOLE"/>
+		<appender-ref ref="CONSOLE_TO_FILE"/>
+	</root>
+
+</log4j:configuration>
